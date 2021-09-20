@@ -13,9 +13,11 @@ function Form (props) {
  const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = {
+
       method: method,
       url: url,
       reqBody: reqBody
+
     };
     const getData = await axios({
       method: method,
