@@ -6,7 +6,7 @@ function Form (props) {
  const handleSubmit = e => {
     e.preventDefault();
     const formData = {
-      method: e.target.select.value,
+      method: 'GET',
       url: e.target.url.value,
     };
     props.handleApiCall(formData);
