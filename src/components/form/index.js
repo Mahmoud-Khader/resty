@@ -19,12 +19,13 @@ function Form (props) {
       reqBody: reqBody
 
     };
-    const getData = await axios({
-      method: method,
-      url: url,
-      reqBody: reqBody
-    });
-    props.handleApiCall(formData,getData);
+    // const getData = await axios({
+    //   method: method,
+    //   url: url,
+    //   reqBody: reqBody
+    // });
+    // props.handleApiCall(formData,getData);
+    props.handleApiCall(formData);
   }
 
   const itemSelect=(e)=>{
