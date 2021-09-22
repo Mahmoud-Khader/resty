@@ -1,7 +1,8 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect,useReducer } from 'react';
 import './app.scss';
 import axios from 'axios';
+
 
 // Let's talk about using index.js and some other name in the component folder
 // There's pros and cons for each way of doing this ...
@@ -9,17 +10,22 @@ import Header from './components/header';
 import Footer from './components/footer';
 import Form from './components/form';
 import Results from './components/results';
+import History from './components/history';
+
+import { initialState,historyReducer,addAction } from './components/history/reducer';
 
 function App() {
 
-  const [data, setdata] = useState(null);
+  const [data, setData] = useState(null);
   const [requestParams, setrequestParams] = useState({});
+  const [state, dispatch] = useReducer(historyReducer,initialState);
 
 
 
   const callApi = (formData) => {
     // mock output
     setrequestParams(formData);
+    // dispatch(addAction(formData))
   }
 
   useEffect(() => {
@@ -35,7 +41,8 @@ function App() {
           reqBody: reqBody
         });
         console.log(data);
-  setdata(data)
+  setData(data)
+  dispatch(addAction(requestParams));
       }
       }
     getApiData ();
@@ -48,6 +55,7 @@ function App() {
       <div>Request Method: {requestParams.method}</div>
       <div>URL: {requestParams.url}</div>
       <Form handleApiCall={callApi} />
+      {<History history={state.history} handleApiCalls={callApi} />}
       <Results data={data} />
       <Footer />
     </React.Fragment>
